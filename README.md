@@ -33,46 +33,6 @@ end
 ```
 >Explanation: -
 
-- **Input Cipher Text**:
-  - `cipher=input("Enter cipher text:",'s');`
-    - Prompts the user to enter the cipher text as a string.
-
-- **Loop Through Offsets**:
-  - `for offset=1:25`
-    - Iterates through possible offsets from 1 to 25 for the Caesar cipher decryption.
-
-- **Initialize Decrypted Text**:
-  - `deciphertext=cipher;`
-    - Initializes the decrypted text as a copy of the cipher text.
-
-- **Process Each Character**:
-  - `for i=1:length(cipher)`
-    - Loops through each character in the cipher text.
-
-- **Convert Character to ASCII**:
-  - `temp = double(cipher(i));`
-    - Converts the current character to its ASCII value.
-
-- **Check Uppercase Characters**:
-  - `if(temp>=65 && temp<=90)`
-    - Checks if the character is an uppercase letter (ASCII 65-90).
-    - Converts the character to its position in the alphabet (0-25).
-    - Shifts the position by the offset.
-    - Converts the shifted position back to an uppercase character.
-
-- **Check Lowercase Characters**:
-  - `elseif(temp>=97 && temp<=122)`
-    - Checks if the character is a lowercase letter (ASCII 97-122).
-    - Converts the character to its position in the alphabet (0-25).
-    - Shifts the position by the offset.
-    - Converts the shifted position back to a lowercase character.
-
-- **Keep Non-Alphabetic Characters Unchanged**:
-  - `else`
-    - If the character is not a letter, it remains unchanged.
-
-- **Display Decrypted Text**:
-  - `disp(deciphertext);`
-    - Displays the decrypted text for the current offset.
+- The MATLAB code provided is a simple implementation of a Caesar cipher decryption algorithm. It prompts the user to input encrypted text and then attempts to decrypt it by shifting each letter back by each possible offset from 1 to 25. The code checks each character to determine if it's an uppercase or lowercase letter and then shifts its ASCII value by the offset. Non-alphabetic characters remain unchanged. After processing each character, the decrypted text is displayed for each offset.
 
 >Output Image: -

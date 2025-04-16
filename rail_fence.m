@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 text=input('Enter the message:','s');
-k=input('Enter the key');
+k=input('Enter the key: ');
 while(mod(length(text),k)~=0)
     text=text+"Z";
     text=char(text);

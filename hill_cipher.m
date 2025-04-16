@@ -9,38 +9,44 @@ while(mod(length(text),n)~=0)
 end
 %Encryption
 key=[2 1; 3 4];
-
 text=reshape(text,[length(text)/n,n]);
-
 text1=transpose(text);
 text1=double(text1)-65;
-
 ciphertext=mod(key*text1,26);
 ciphertext=char(ciphertext+65);
 ciphertext=transpose(ciphertext);
 ciphertext=reshape(ciphertext,1,[]);
-
-disp(ciphertext);
+disp("Encrypted text: " + ciphertext);
 
 %Decryption
+% Calculate inverse of key matrix manually without using adjoint
+det_key = mod((key(1,1)*key(2,2) - key(1,2)*key(2,1)), 26);
 
-key1=det(key);
+% Find modular multiplicative inverse of determinant
+k2 = 0;
 for i=1:1:25
-    a = mod(key1*i,26);
-    if a==1
-            k2=i;
+    if mod(det_key*i, 26) == 1
+        k2 = i;
+        break;
     end
 end
 
-key_inverse=round(mod(k2*adjoint(key),26));
+% Calculate the adjugate matrix (often called adjoint) manually
+adjugate = [key(2,2), -key(1,2); -key(2,1), key(1,1)];
+% Ensure negative values are properly handled in modulo 26
+adjugate = mod(adjugate + 26, 26);
 
-ciphertext=double(ciphertext)-65;
+% Calculate the inverse key matrix
+key_inverse = mod(k2 * adjugate, 26);
 
-ciphertext=reshape(ciphertext,length(ciphertext)/n,[]);
-ciphertext=transpose(ciphertext);
+% Reshape ciphertext for decryption
+ciphertext_reshape = reshape(ciphertext, [length(ciphertext)/n, n]);
+ciphertext_transpose = transpose(ciphertext_reshape);
+ciphertext_num = double(ciphertext_transpose) - 65;
 
-deciphertext=mod(key_inverse*ciphertext,26);
-deciphertext=transpose(deciphertext);
-deciphertext=reshape(deciphertext,1,[]);
-deciphertext=char(deciphertext + 65);
-disp(deciphertext);
+% Decrypt the message
+deciphertext = mod(key_inverse * ciphertext_num, 26);
+deciphertext = char(deciphertext + 65);
+deciphertext = transpose(deciphertext);
+deciphertext = reshape(deciphertext, 1, []);
+disp("Decrypted text: " + deciphertext);

@@ -1,6 +1,6 @@
 %Taking the input from the users
-text=input('Enter the plain text.','s');
-offset=input('Enter the offset value.');
+text=input('Enter the plain text: ','s');
+offset=input('Enter the offset value: ');
 ciphertext=text;
 
 for i=1:length(text)
